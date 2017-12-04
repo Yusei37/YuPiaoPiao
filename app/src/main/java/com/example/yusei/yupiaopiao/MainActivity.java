@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FrameLayout ly_content;
 
-    private FirstFragment f1,f2,f3,f4;
+    private FirstFragment f2,f3,f4;
+    private SecondFragment f1;
     private FragmentManager fragmentManager;
 
     @Override
@@ -27,7 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         bindView();
 
     }
@@ -81,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selected();
                 tabDeal.setSelected(true);
                 if(f1==null){
-                    f1 = new FirstFragment("第一个Fragment");
+                //    f1 = new FirstFragment("第一个Fragment");
+                    f1 = new SecondFragment();
                     transaction.add(R.id.fragment_container,f1);
                 }else{
                     transaction.show(f1);
