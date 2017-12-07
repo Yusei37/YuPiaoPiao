@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_margin="18dp"
-            android:background="@drawable/btn_selector"/>
+            android:backgroundTint="#FFF"
+            android:src="@drawable/btn_selector"/>
 
 
 </LinearLayout>
