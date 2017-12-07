@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class SecondFragment extends Fragment  implements View.OnClickListener{
 
-    private Button button1;
+    private FloatingActionButton fab;
 
     public  SecondFragment(){
 
@@ -37,8 +38,8 @@ public class SecondFragment extends Fragment  implements View.OnClickListener{
         lvList = (ListView) view.findViewById(R.id.lv_list);
         mAdapter = new MyAdapter();
         lvList.setAdapter(mAdapter);
-        button1 = (Button) view.findViewById(R.id.button1);
-        button1.setOnClickListener(this);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(this);
         return view;
     }
 
@@ -183,8 +184,7 @@ public class SecondFragment extends Fragment  implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button1:
-
+            case R.id.fab:
                 startListen(getView());
                 break;
         }
