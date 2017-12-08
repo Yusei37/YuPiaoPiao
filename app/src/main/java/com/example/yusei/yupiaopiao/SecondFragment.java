@@ -100,21 +100,27 @@ public class SecondFragment extends Fragment  implements View.OnClickListener{
                     //初始化回答对象
                     String answer = "没听清";
                     int imageId = -1;
-                    if (askContent.contains("你好")) {
-                        answer = "你好呀!";
-                    } else if (askContent.contains("你是谁")) {
-                        answer = "我是你的小助手!";
-                    } else if (askContent.contains("美女")) {
-                        //随机回答
-                        int i = (int) (Math.random() * mAnswers.length);//0,1,2,3
-                        answer = mAnswers[i];
+//                    if (askContent.contains("你好")) {
+//                        answer = "你好呀!";
+//                    } else if (askContent.contains("你是谁")) {
+//                        answer = "我是你的小助手!";
+//                    } else if (askContent.contains("美女")) {
+//                        //随机回答
+//                        int i = (int) (Math.random() * mAnswers.length);//0,1,2,3
+//                        answer = mAnswers[i];
+//
+//                        int j = (int) (Math.random() * mPics.length);//0,1,2,3
+//                        imageId = mPics[j];
+//                    } else if (askContent.contains("天王盖地虎")) {
+//                        answer = "小鸡炖蘑菇";
+//                        imageId = R.drawable.m;
+//                    }
+                    TulingChat tulingChat = new TulingChat();
+                    tulingChat.chat(askContent);
+                    while (tulingChat.getText().equals("")) {
 
-                        int j = (int) (Math.random() * mPics.length);//0,1,2,3
-                        imageId = mPics[j];
-                    } else if (askContent.contains("天王盖地虎")) {
-                        answer = "小鸡炖蘑菇";
-                        imageId = R.drawable.m;
                     }
+                    answer = tulingChat.getText();
 
                     TalkBean answerBean = new TalkBean(answer, imageId, false);
                     mList.add(answerBean);
