@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:background="@drawable/login_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/logo"
+            android:layout_width="139dp"
+            android:layout_height="116dp"
+            android:src="@drawable/logo"
+            android:layout_marginTop="62dp"
+            android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="账号"
+            android:ems="10"
+            android:layout_below="@+id/logo" android:layout_alignEnd="@+id/password" android:layout_marginTop="16dp"
+            android:id="@+id/phoneNumber"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="密码"
+            android:ems="10"
+            android:layout_marginTop="72dp" android:id="@+id/password" android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"/>
+
+    <Button
+            android:id="@+id/login"
+            android:text="登录"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/password" android:layout_alignStart="@+id/password"
+            android:layout_alignEnd="@+id/password"/>
+
+    <TextView
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_below="@+id/login"
+            android:layout_alignStart="@+id/login" android:layout_marginTop="15dp" android:id="@+id/forgotPassword"/>
+
+    <TextView
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignBottom="@+id/forgotPassword"
+            android:layout_alignEnd="@+id/login" android:id="@+id/newRegister"/>
+
+</RelativeLayout>
