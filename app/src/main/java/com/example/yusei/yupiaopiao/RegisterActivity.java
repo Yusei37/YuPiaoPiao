@@ -1,6 +1,5 @@
 package com.example.yusei.yupiaopiao;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -16,63 +15,56 @@ import android.widget.Toast;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText phoneNumber;
-    private EditText password;
+    private EditText edt_phoneNumber;
+    private EditText edt_password;
+    private EditText edt_name;
+    private EditText edt_email;
+    private EditText edt_city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        phoneNumber = (EditText) findViewById(R.id.phoneNumber);
-        password = (EditText) findViewById(R.id.password);
-
-        Button btn_login = (Button) findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(this);
-
-        TextView forgotPassword = (TextView) findViewById(R.id.forgotPassword);
-        TextView newRegister = (TextView) findViewById(R.id.newRegister);
-        String forgotPasswordText = "忘记密码";
-        String newRegisterText = "新用户注册";
-        SpannableString spannableForgotPasswordText = new SpannableString(forgotPasswordText);
-        spannableForgotPasswordText.setSpan(new ClickableSpan() {
+        setContentView(R.layout.activity_register);
+        edt_phoneNumber = (EditText) findViewById(R.id.edt_reg_phoneNumber);
+        edt_password = (EditText) findViewById(R.id.edt_reg_password);
+        edt_name = (EditText) findViewById(R.id.edt_reg_name);
+        edt_email = (EditText) findViewById(R.id.edt_reg_email);
+        edt_city = (EditText) findViewById(R.id.edt_reg_city);
+        Button btn_register = (Button) findViewById(R.id.btn_register);
+        btn_register.setOnClickListener(this);
+        String text = "* 注册及视为同意 yupiaopiao注册协议及版权声明";
+        SpannableString spannableText = new SpannableString(text);
+        spannableText.setSpan(new ClickableSpan() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "忘记密码", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "注册协议", Toast.LENGTH_SHORT).show();
             }
-        }, 0, forgotPasswordText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        SpannableString spannableNewRegisterText = new SpannableString(newRegisterText);
-        spannableNewRegisterText.setSpan(new ClickableSpan() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        }, 0, newRegisterText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        forgotPassword.setText(spannableForgotPasswordText);
-        forgotPassword.setMovementMethod(LinkMovementMethod.getInstance());
-        newRegister.setText(spannableNewRegisterText);
-        newRegister.setMovementMethod(LinkMovementMethod.getInstance());
+        }, 10, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        TextView tv_protocol = (TextView) findViewById(R.id.tv_protocol);
+        tv_protocol.setText(spannableText);
+        tv_protocol.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_login:
-                Toast.makeText(MyApplication.getContext(), "登录中...",Toast.LENGTH_SHORT).show();
+            case R.id.btn_register:
+                Toast.makeText(MyApplication.getContext(), "注册中...",Toast.LENGTH_SHORT).show();
                 CommonRequest request = new CommonRequest();
-                request.addRequestParam("PhoneNumber", phoneNumber.getText().toString());
-                request.addRequestParam("Password", password.getText().toString());
-                login(request);
+                request.addRequestParam("PhoneNumber", edt_phoneNumber.getText().toString());
+                request.addRequestParam("Password", edt_password.getText().toString());
+                request.addRequestParam("CustomerName", edt_name.getText().toString());
+                request.addRequestParam("CustomerEmail", edt_email.getText().toString());
+                request.addRequestParam("City", edt_city.getText().toString());
+                register(request);
                 break;
         }
     }
 
-    private void login(final CommonRequest request) {
+    private void register(final CommonRequest request) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -80,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
-                    URL url = new URL("http://10.0.2.2:8080/ServletTest/LoginServlet");
+                    URL url = new URL("http://10.0.2.2:8080/ServletTest/RegisterServlet");
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
                     connection.setRequestMethod("POST");

@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selected();
                 tabMore.setSelected(true);
                 if(f2==null){
-                    f2 = new FirstFragment("第二个Fragment");
+                    f2 = new FirstFragment();
                     transaction.add(R.id.fragment_container,f2);
                 }else{
                     transaction.show(f2);

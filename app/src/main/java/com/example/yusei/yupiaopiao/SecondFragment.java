@@ -50,11 +50,11 @@ public class SecondFragment extends Fragment  implements View.OnClickListener{
     private ArrayList<TalkBean> mList = new ArrayList<TalkBean>();
     private MyAdapter mAdapter;
 
-    private String[] mAnswers = new String[] { "约吗?", "这张怎么样?", "漂不漂亮呀?",
-            "一晚上500块呀!" };
-
-    private int[] mPics = new int[] { R.drawable.p1, R.drawable.p2,
-            R.drawable.p3, R.drawable.p4 };
+//    private String[] mAnswers = new String[] { "约吗?", "这张怎么样?", "漂不漂亮呀?",
+//            "一晚上500块呀!" };
+//
+//    private int[] mPics = new int[] { R.drawable.p1, R.drawable.p2,
+//            R.drawable.p3, R.drawable.p4 };
 
     /**
      * 开始语音识别

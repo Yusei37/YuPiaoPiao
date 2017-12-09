@@ -14,6 +14,10 @@ public class FirstFragment extends Fragment {
     private String context;
     private TextView mTextView;
 
+    public  FirstFragment() {
+
+    }
+
     public  FirstFragment(String context){
         this.context = context;
     }
@@ -24,7 +28,9 @@ public class FirstFragment extends Fragment {
         View view = inflater.inflate(R.layout.first_fragment,container,false);
         mTextView = (TextView)view.findViewById(R.id.txt_content);
         //mTextView = (TextView)getActivity().findViewById(R.id.txt_content);
-        mTextView.setText(context);
+        if (context != null ){
+            mTextView.setText(context);
+        }
         return view;
     }
 }

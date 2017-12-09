@@ -31,7 +31,7 @@
             android:layout_centerHorizontal="true"/>
 
     <Button
-            android:id="@+id/login"
+            android:id="@+id/btn_login"
             android:text="登录"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,13 +42,13 @@
     <TextView
             android:clickable="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_below="@+id/login"
-            android:layout_alignStart="@+id/login" android:layout_marginTop="15dp" android:id="@+id/forgotPassword"/>
+            android:layout_height="wrap_content" android:layout_below="@+id/btn_login"
+            android:layout_alignStart="@+id/btn_login" android:layout_marginTop="15dp" android:id="@+id/forgotPassword"/>
 
     <TextView
             android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_alignBottom="@+id/forgotPassword"
-            android:layout_alignEnd="@+id/login" android:id="@+id/newRegister"/>
+            android:layout_alignEnd="@+id/btn_login" android:id="@+id/newRegister"/>
 
 </RelativeLayout>
