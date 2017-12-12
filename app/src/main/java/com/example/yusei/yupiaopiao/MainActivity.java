@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FrameLayout ly_content;
 
-    private FirstFragment f2,f3,f4;
+    private FirstFragment f2,f4;
     private SecondFragment f1;
+    private MovieFragment f3;
     private FragmentManager fragmentManager;
 
     private DrawerLayout mDrawerLayout;
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selected();
                 tabPoi.setSelected(true);
                 if(f3==null){
-                    f3 = new FirstFragment("第三个Fragment");
+                    f3 = new MovieFragment();
                     transaction.add(R.id.fragment_container,f3);
                 }else{
                     transaction.show(f3);
