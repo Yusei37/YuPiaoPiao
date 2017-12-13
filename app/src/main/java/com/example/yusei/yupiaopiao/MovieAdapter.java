@@ -1,6 +1,7 @@
 package com.example.yusei.yupiaopiao;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -51,7 +52,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 Toast.makeText(getContext(), "购票", Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(getContext(), "其他", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), MovieDetailActivity.class);
+                v.getContext().startActivity(intent);
             }
         }
     }
