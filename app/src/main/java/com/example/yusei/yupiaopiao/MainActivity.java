@@ -22,9 +22,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FrameLayout ly_content;
 
-    private FirstFragment f2,f4;
+    private FirstFragment f2;
     private SecondFragment f1;
     private MovieFragment f3;
+    private TheatreFragment f4;
+
     private FragmentManager fragmentManager;
 
     private DrawerLayout mDrawerLayout;
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selected();
                 tabUser.setSelected(true);
                 if(f4==null){
-                    f4 = new FirstFragment("第四个Fragment");
+                    f4 = new TheatreFragment();
                     transaction.add(R.id.fragment_container,f4);
                 }else{
                     transaction.show(f4);
