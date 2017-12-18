@@ -1,5 +1,6 @@
 package com.example.yusei.yupiaopiao;
 
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +57,8 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
         text.setSpan(new ClickableSpan() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MovieDetailActivity.this, "写影评", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MyApplication.getContext(), CinecismActivity.class);
+                startActivity(intent);
             }
         }, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv_writeCinecism.setText(text);
