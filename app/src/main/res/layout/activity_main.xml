@@ -50,7 +50,7 @@
                     android:drawableTop="@drawable/tab_menu_deal"
                     android:gravity="center"
                     android:textColor="@drawable/tab_menu_deal_text"
-                    android:text="点餐"/>
+                    android:text="客服"/>
 
             <TextView
                     android:id="@+id/txt_poi"
@@ -62,7 +62,7 @@
                     android:drawableTop="@drawable/tab_menu_poi"
                     android:gravity="center"
                     android:textColor="@drawable/tab_menu_poi_text"
-                    android:text="商铺"/>
+                    android:text="电影"/>
 
             <TextView
                     android:id="@+id/txt_user"
@@ -74,7 +74,7 @@
                     android:drawableTop="@drawable/tab_menu_user"
                     android:gravity="center"
                     android:textColor="@drawable/tab_menu_user_text"
-                    android:text="用户"/>
+                    android:text="影院"/>
 
             <TextView
                     android:id="@+id/txt_more"

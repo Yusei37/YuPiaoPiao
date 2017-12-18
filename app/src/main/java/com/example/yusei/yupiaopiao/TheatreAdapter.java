@@ -1,6 +1,7 @@
 package com.example.yusei.yupiaopiao;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,8 @@ public class TheatreAdapter extends RecyclerView.Adapter<TheatreAdapter.ViewHold
         @Override
         public void onClick(View v) {
             Toast.makeText(v.getContext(), tv_theatreName.getText().toString(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), FilmArrangementActivity.class);
+            v.getContext().startActivity(intent);
         }
 
     }
