@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class TheatreFragment extends Fragment {
@@ -76,12 +77,25 @@ public class TheatreFragment extends Fragment {
     }
 
     public void initTheatre() {
-        theatreList.clear();
-        for (int i = 0; i < 20; i++) {
-            Theatre theatre = new Theatre();
-            theatre.setTheatreName(i+"影院名称");
-            theatre.setTheatreAddress("大萨达所大所是的阿萨德撒");
-            theatreList.add(theatre);
-        }
+        CommonRequest request = new CommonRequest();
+        new HttpPostTask(request, new ResponseHandler() {
+            @Override
+            public void success(CommonResponse response) {
+                ArrayList<HashMap<String, String>> list = response.getDataList();
+                for (int i = 0; i < list.size(); i++) {
+                    Theatre theatre = new Theatre();
+                    HashMap<String, String> map = list.get(i);
+                    theatre.setTheatreName(map.get("TheatreName"));
+                    theatre.setTheatreAddress(map.get("TheatreAddress"));
+                    theatreList.add(theatre);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(String failCode, String failMsg) {
+                Toast.makeText(MyApplication.getContext(), failMsg, Toast.LENGTH_SHORT).show();
+            }
+        }).execute("http://10.0.2.2:8080/ServletTest/TheatreServlet");
     }
 }

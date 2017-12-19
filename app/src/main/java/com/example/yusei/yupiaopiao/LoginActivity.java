@@ -72,67 +72,94 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void login(final CommonRequest request) {
-        new Thread(new Runnable() {
+    private void login(CommonRequest request) {
+        new HttpPostTask(request, new ResponseHandler() {
             @Override
-            public void run() {
-                //   String result = null;
-                HttpURLConnection connection = null;
-                BufferedReader reader = null;
-                try {
-                    URL url = new URL("http://10.0.2.2:8080/ServletTest/LoginServlet");
-                    connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-                    connection.setRequestMethod("POST");
-                    connection.setConnectTimeout(8000);
-                    connection.setReadTimeout(8000);
-                    connection.setDoInput(true);
-                    connection.setDoOutput(true);
-
-                    DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-//            JSONObject object = new JSONObject();
-//            object.put("requestCode",100);
-//            HashMap<String, String> requestParam = new HashMap<>();
-//                    requestParam.put("PhoneNumber","123");
-//                    requestParam.put("Password","123");
-//            JSONObject param = new JSONObject(requestParam);
-//            object.put("requestParam", param);
-                    out.writeBytes(request.getJsonStr());
-                    out.flush();
-
-                    InputStream in = connection.getInputStream();
-
-                    reader = new BufferedReader(new InputStreamReader(in));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-                    showResponse(response.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    if (reader != null) {
-                        try {
-                            reader.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (connection != null) {
-                        connection.disconnect();
-                    }
-                }
+            public void success(CommonResponse response) {
+                Toast.makeText(MyApplication.getContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                Customer currentLoginCustomer = new Customer();
+                currentLoginCustomer.setPhoneNumber(response.getPropertyMap().get("PhoneNumber"));
+                currentLoginCustomer.setPassword(response.getPropertyMap().get("Password"));
+                currentLoginCustomer.setCustomerName(response.getPropertyMap().get("CustomerName"));
+                currentLoginCustomer.setSex(response.getPropertyMap().get("Sex"));
+                currentLoginCustomer.setCustomerEmail(response.getPropertyMap().get("CustomerEmail"));
+                currentLoginCustomer.setCity(response.getPropertyMap().get("City"));
+                String date = response.getPropertyMap().get("RegisterDate");
+                currentLoginCustomer.setRegisterDate(new java.util.Date(Long.valueOf(date).longValue()));
+                currentLoginCustomer.setVIPLevel(Integer.valueOf(response.getPropertyMap().get("VIPLevel")));
+                Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+                intent.putExtra("Customer", currentLoginCustomer);
+                startActivity(intent);
             }
-        }).start();
+
+            @Override
+            public void fail(String failCode, String failMsg) {
+                Toast.makeText(MyApplication.getContext(), failMsg, Toast.LENGTH_SHORT).show();
+            }
+        }).execute("http://10.0.2.2:8080/ServletTest/LoginServlet");
     }
 
-    private void showResponse(final String response) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(MyApplication.getContext(), response,Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void login(final CommonRequest request) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                //   String result = null;
+//                HttpURLConnection connection = null;
+//                BufferedReader reader = null;
+//                try {
+//                    URL url = new URL("http://10.0.2.2:8080/ServletTest/LoginServlet");
+//                    connection = (HttpURLConnection) url.openConnection();
+//                    connection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
+//                    connection.setRequestMethod("POST");
+//                    connection.setConnectTimeout(8000);
+//                    connection.setReadTimeout(8000);
+//                    connection.setDoInput(true);
+//                    connection.setDoOutput(true);
+//
+//                    DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+////            JSONObject object = new JSONObject();
+////            object.put("requestCode",100);
+////            HashMap<String, String> requestParam = new HashMap<>();
+////                    requestParam.put("PhoneNumber","123");
+////                    requestParam.put("Password","123");
+////            JSONObject param = new JSONObject(requestParam);
+////            object.put("requestParam", param);
+//                    out.writeBytes(request.getJsonStr());
+//                    out.flush();
+//
+//                    InputStream in = connection.getInputStream();
+//
+//                    reader = new BufferedReader(new InputStreamReader(in));
+//                    StringBuilder response = new StringBuilder();
+//                    String line;
+//                    while ((line = reader.readLine()) != null) {
+//                        response.append(line);
+//                    }
+//                    showResponse(response.toString());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    if (reader != null) {
+//                        try {
+//                            reader.close();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    if (connection != null) {
+//                        connection.disconnect();
+//                    }
+//                }
+//            }
+//        }).start();
+//    }
+//
+//    private void showResponse(final String response) {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toast.makeText(MyApplication.getContext(), response,Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 }

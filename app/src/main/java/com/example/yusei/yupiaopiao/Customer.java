@@ -6,8 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by yusei on 2017/12/8
  */
-public class CustomerBean implements Parcelable {
-    public static CustomerBean currentLoginCustomer = null;
+public class Customer implements Parcelable {
     private String phoneNumber;
     private String password;
     private String customerName;
@@ -17,10 +16,10 @@ public class CustomerBean implements Parcelable {
     private java.util.Date registerDate;
     private int VIPLevel;
 
-    public CustomerBean(){
+    public Customer(){
     }
 
-    protected CustomerBean(Parcel in){
+    protected Customer(Parcel in){
         phoneNumber = in.readString();
         password = in.readString();
         customerName = in.readString();
@@ -80,15 +79,15 @@ public class CustomerBean implements Parcelable {
         this.VIPLevel = VIPLevel;
     }
 
-    public static final Creator<CustomerBean> CREATOR = new Creator<CustomerBean>() {
+    public static final Creator<Customer> CREATOR = new Creator<Customer>() {
         @Override
-        public CustomerBean createFromParcel(Parcel in) {
-            return new CustomerBean(in);
+        public Customer createFromParcel(Parcel in) {
+            return new Customer(in);
         }
 
         @Override
-        public CustomerBean[] newArray(int size) {
-            return new CustomerBean[size];
+        public Customer[] newArray(int size) {
+            return new Customer[size];
         }
     };
 
