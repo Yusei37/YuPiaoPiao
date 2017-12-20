@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MovieFragment extends Fragment {
@@ -38,14 +39,33 @@ public class MovieFragment extends Fragment {
     }
 
     private void initMovies() {
-        movieList.clear();
-        for (int i = 0; i < 50; i++) {
-            Movie movie = new Movie();
-            movie.setPoster(R.drawable.nav_icon);
-            movie.setMovieName("电影名称:xxx");
-            movie.setDirector("导演:xx");
-            movie.setActor("主演:xxx");
-            movieList.add(movie);
-        }
+        CommonRequest request = new CommonRequest();
+        new HttpPostTask(request, new ResponseHandler() {
+            @Override
+            public void success(CommonResponse response) {
+                ArrayList<HashMap<String, String>> list = response.getDataList();
+                for (int i = 0; i < list.size(); i++) {
+                    Movie movie = new Movie();
+                    HashMap<String, String> map = list.get(i);
+                    movie.setMovieName(map.get("MovieName"));
+                    movie.setDirector(map.get("Director"));
+                    movie.setActor(map.get("Actor"));
+                    String date = map.get("ReleaseTime");
+                    movie.setReleaseTime(new java.util.Date(Long.valueOf(date).longValue()));
+                    date = map.get("ReleaseTime");
+                    movie.setProjectionTime(new java.util.Date(Long.valueOf(date).longValue()));
+                    movie.setPoster(map.get("Poster"));
+                    movie.setBrief(map.get("Brief"));
+                    movie.setDuration(Integer.valueOf(map.get("Duration")));
+                    movieList.add(movie);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(String failCode, String failMsg) {
+                Toast.makeText(MyApplication.getContext(), failMsg, Toast.LENGTH_SHORT).show();
+            }
+        }).execute("http://10.0.2.2:8080/ServletTest/MovieServlet");
     }
 }

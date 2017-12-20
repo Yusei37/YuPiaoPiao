@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FilmArrangementActivity extends AppCompatActivity {
@@ -22,6 +23,8 @@ public class FilmArrangementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filmarrangement);
+        //Theatre theatre = getIntent().getParcelableExtra("Theatre");
+       // String theatreName = getIntent().getStringExtra("TheatreName");
         initFilmArrangement();
 
         Spinner sp_movie = (Spinner) findViewById(R.id.sp_movie);
@@ -67,14 +70,30 @@ public class FilmArrangementActivity extends AppCompatActivity {
     }
 
     public void initFilmArrangement() {
-        filmArrangementList.clear();
-        for (int i = 0; i < 20; i++) {
-            FilmArrangement filmArrangement = new FilmArrangement();
-            filmArrangement.setBeginTime(new java.util.Date());
-            filmArrangement.setEndTime(new java.util.Date());
-            filmArrangement.setMovieHallName("巨幕厅");
-            filmArrangement.setPrice(1.25);
-            filmArrangementList.add(filmArrangement);
-        }
+        CommonRequest request = new CommonRequest();
+      //  request.addRequestParam("TheatreName", "哈迪斯影院");
+        new HttpPostTask(request, new ResponseHandler() {
+            @Override
+            public void success(CommonResponse response) {
+                ArrayList<HashMap<String, String>> list = response.getDataList();
+                for (int i = 0; i < list.size(); i++) {
+                    FilmArrangement filmArrangement = new FilmArrangement();
+                    HashMap<String, String> map = list.get(i);
+                    String date = map.get("BeginTime");
+                    filmArrangement.setBeginTime(new java.util.Date(Long.valueOf(date).longValue()));
+                    date = map.get("EndTime");
+                    filmArrangement.setEndTime(new java.util.Date(Long.valueOf(date).longValue()));
+                    filmArrangement.setMovieHallName(map.get("MovieHallName"));
+                    filmArrangement.setPrice(Double.valueOf(map.get("Price")));
+                    filmArrangementList.add(filmArrangement);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(String failCode, String failMsg) {
+                Toast.makeText(MyApplication.getContext(), failMsg, Toast.LENGTH_SHORT).show();
+            }
+        }).execute("http://10.0.2.2:8080/ServletTest/FilmArrangementServlet");
     }
 }

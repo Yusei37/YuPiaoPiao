@@ -26,8 +26,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     private List<Movie> mMovieList;
 
-    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        CardView cardView;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        View movieView;
         ImageView movieimage;
         TextView tv_moviename;
         TextView tv_director;
@@ -36,25 +36,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
         public ViewHolder(View view) {
             super(view);
-            view.setOnClickListener(this);
-            cardView = (CardView) view;
+            movieView = view;
             movieimage = (ImageView) view.findViewById(R.id.movie_image);
             tv_moviename = (TextView) view.findViewById(R.id.tv_movieName);
             tv_director = (TextView) view.findViewById(R.id.tv_director);
             tv_actor = (TextView) view.findViewById(R.id.tv_actor);
             btn_buy = (Button) view.findViewById(R.id.btn_buy);
-            btn_buy.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.btn_buy) {
-                Toast.makeText(getContext(), "购票", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Intent intent = new Intent(v.getContext(), MovieDetailActivity.class);
-                v.getContext().startActivity(intent);
-            }
         }
     }
 
@@ -68,13 +55,30 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.movie_item, parent, false);
-        return new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.movieView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int postion = holder.getAdapterPosition();
+                Movie movie = mMovieList.get(postion);
+                Intent intent = new Intent(v.getContext(), MovieDetailActivity.class);
+                intent.putExtra("Movie", movie);
+                v.getContext().startActivity(intent);
+            }
+        });
+        holder.btn_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "购票", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Movie movie = mMovieList.get(position);
-        Glide.with(mContext).load(movie.getPoster()).into(holder.movieimage);
+        Glide.with(mContext).load(movie.getPoster()).fitCenter().error(R.mipmap.ic_launcher).into(holder.movieimage);
         holder.tv_moviename.setText(movie.getMovieName());
         holder.tv_director.setText(movie.getDirector());
         holder.tv_actor.setText(movie.getActor());

@@ -17,9 +17,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.bumptech.glide.Glide;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MovieDetailActivity extends AppCompatActivity implements View.OnClickListener{
@@ -28,22 +30,29 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
     private CinecismAdapter adapter;
     private TextView tv_buy;
     private TextView tv_writeCinecism;
+    private TextView tv_brief;
+    private TextView tv_actor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moviedetail);
+        Movie movie = (Movie) getIntent().getSerializableExtra("Movie");
         initCinecism();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         ImageView iv_movieImage = (ImageView) findViewById(R.id.iv_movieImage);
-        iv_movieImage.setImageResource(R.drawable.nav_icon);
+        Glide.with(this).load(movie.getPoster()).fitCenter().error(R.mipmap.ic_launcher).into(iv_movieImage);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        collapsingToolbarLayout.setTitle(new String("电影名称"));
+        collapsingToolbarLayout.setTitle(movie.getMovieName());
+        tv_brief = (TextView) findViewById(R.id.tv_brief);
+        tv_brief.setText(movie.getBrief());
+        tv_actor = (TextView) findViewById(R.id.tv_actor);
+        tv_actor.setText(movie.getActor());
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_cinecism);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -66,13 +75,27 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void initCinecism() {
-        cinecismList.clear();
-        for (int i = 0; i < 50; i++) {
-            Cinecism cinecism = new Cinecism();
-            cinecism.setPhoneNumber(i + " aaaa");
-            cinecism.setComment("dsd sad asf as sf d e wqd asd sad asd sf df s fas dasd asd ssd asd sad sad sad asd s dsa ");
-            cinecismList.add(cinecism);
-        }
+        CommonRequest request = new CommonRequest();
+        request.addRequestParam("MovieName", new String("奇门遁甲"));
+        new HttpPostTask(request, new ResponseHandler() {
+            @Override
+            public void success(CommonResponse response) {
+                ArrayList<HashMap<String, String>> list = response.getDataList();
+                for (int i = 0; i < list.size(); i++) {
+                    Cinecism cinecism = new Cinecism();
+                    HashMap<String, String> map = list.get(i);
+                    cinecism.setPhoneNumber(map.get("PhoneNumber"));
+                    cinecism.setComment(map.get("Comment"));
+                    cinecismList.add(cinecism);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void fail(String failCode, String failMsg) {
+                Toast.makeText(MyApplication.getContext(), failMsg, Toast.LENGTH_SHORT).show();
+            }
+        }).execute("http://10.0.2.2:8080/ServletTest/CinecismServlet");
     }
 
 

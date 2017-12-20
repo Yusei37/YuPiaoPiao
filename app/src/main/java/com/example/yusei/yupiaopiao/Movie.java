@@ -1,16 +1,18 @@
 package com.example.yusei.yupiaopiao;
 
+import java.io.Serializable;
+
 /**
  * Created by yusei on 2017/12/12
  */
-public class Movie {
+public class Movie implements Serializable {
 
     private String movieName;
     private String director;
     private String actor;
     private java.util.Date releaseTime;
     private java.util.Date projectionTime;
-    private int poster;
+    private String poster;
     private String brief;
     private int duration;
 
@@ -54,11 +56,11 @@ public class Movie {
         this.projectionTime = projectionTime;
     }
 
-    public int getPoster() {
+    public String getPoster() {
         return poster;
     }
 
-    public void setPoster(int poster) {
+    public void setPoster(String poster) {
         this.poster = poster;
     }
 

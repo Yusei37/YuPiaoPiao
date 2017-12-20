@@ -20,23 +20,17 @@ public class TheatreAdapter extends RecyclerView.Adapter<TheatreAdapter.ViewHold
 
     private List<Theatre> mTheatreList;
 
-    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
+        View theatreView;
         TextView tv_theatreName;
         TextView tv_theatreAddress;
 
         public ViewHolder(View view) {
             super(view);
+            theatreView  = view;
             tv_theatreName = (TextView) view.findViewById(R.id.tv_theatreName);
             tv_theatreAddress = (TextView) view.findViewById(R.id.tv_theatreAddress);
-            view.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(v.getContext(), tv_theatreName.getText().toString(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(v.getContext(), FilmArrangementActivity.class);
-            v.getContext().startActivity(intent);
         }
 
     }
@@ -51,7 +45,19 @@ public class TheatreAdapter extends RecyclerView.Adapter<TheatreAdapter.ViewHold
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.theatre_item, parent, false);
-        return new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.theatreView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int postion = holder.getAdapterPosition();
+                Theatre theatre = mTheatreList.get(postion);
+                Intent intent = new Intent(v.getContext(), FilmArrangementActivity.class);
+            //    intent.putExtra("Theatre", theatre);
+            //    intent.putExtra("TheatreName",theatre.getTheatreName());
+                v.getContext().startActivity(intent);
+            }
+        });
+        return holder;
     }
 
     @Override
