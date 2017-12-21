@@ -37,7 +37,7 @@ public class HttpPostTask extends AsyncTask<String, String, String> {
             connection.setDoInput(true);
 
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-            out.writeBytes(request.getJsonStr());
+            out.write(request.getJsonStr().getBytes("utf-8"));
             out.flush();
 
             InputStream in = connection.getInputStream();

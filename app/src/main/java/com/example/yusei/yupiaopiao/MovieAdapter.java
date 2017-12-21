@@ -70,6 +70,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "购票", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), SeatActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
         return holder;

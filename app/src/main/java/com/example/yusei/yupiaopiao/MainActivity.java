@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private DrawerLayout mDrawerLayout;
 
-    private Customer currentLoginCustomer;
+    public static Customer currentLoginCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

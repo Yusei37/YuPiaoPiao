@@ -8,6 +8,15 @@
         android:layout_height="match_parent"
         tools:context="com.example.yusei.yupiaopiao.CinecismActivity">
 
+    <TextView
+            android:paddingTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="我的评分"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:textColor="#000000"/>
+
     <RatingBar
             android:id="@+id/rb"
             android:layout_width="wrap_content"
@@ -18,10 +27,19 @@
             android:stepSize="0.5"/>
 
     <EditText
+            android:paddingTop="20dp"
             android:id="@+id/edt_writecomment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="写几句评论"/>
+
+    <Button
+            android:id="@+id/btn_publish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="发布"
+            android:backgroundTint="#436EEE"/>
 
 
 </LinearLayout>

@@ -52,7 +52,7 @@ public class TheatreAdapter extends RecyclerView.Adapter<TheatreAdapter.ViewHold
                 int postion = holder.getAdapterPosition();
                 Theatre theatre = mTheatreList.get(postion);
                 Intent intent = new Intent(v.getContext(), FilmArrangementActivity.class);
-            //    intent.putExtra("Theatre", theatre);
+                intent.putExtra("Theatre", theatre);
             //    intent.putExtra("TheatreName",theatre.getTheatreName());
                 v.getContext().startActivity(intent);
             }

@@ -33,11 +33,13 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
     private TextView tv_brief;
     private TextView tv_actor;
 
+    private Movie movie;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moviedetail);
-        Movie movie = (Movie) getIntent().getSerializableExtra("Movie");
+        movie = (Movie) getIntent().getSerializableExtra("Movie");
         initCinecism();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -67,6 +69,7 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MyApplication.getContext(), CinecismActivity.class);
+                intent.putExtra("Movie", movie);
                 startActivity(intent);
             }
         }, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -76,7 +79,7 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
 
     private void initCinecism() {
         CommonRequest request = new CommonRequest();
-        request.addRequestParam("MovieName", new String("奇门遁甲"));
+        request.addRequestParam("MovieName", movie.getMovieName());
         new HttpPostTask(request, new ResponseHandler() {
             @Override
             public void success(CommonResponse response) {

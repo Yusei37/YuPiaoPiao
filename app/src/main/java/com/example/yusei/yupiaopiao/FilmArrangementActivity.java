@@ -18,13 +18,14 @@ public class FilmArrangementActivity extends AppCompatActivity {
 
     private List<FilmArrangement> filmArrangementList = new ArrayList<>();
     private FilmArrangementAdapter adapter;
+    private FilmArrangement filmArrangement;
+    private Theatre theatre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filmarrangement);
-        //Theatre theatre = getIntent().getParcelableExtra("Theatre");
-       // String theatreName = getIntent().getStringExtra("TheatreName");
+        theatre = getIntent().getParcelableExtra("Theatre");
         initFilmArrangement();
 
         Spinner sp_movie = (Spinner) findViewById(R.id.sp_movie);
@@ -71,7 +72,7 @@ public class FilmArrangementActivity extends AppCompatActivity {
 
     public void initFilmArrangement() {
         CommonRequest request = new CommonRequest();
-      //  request.addRequestParam("TheatreName", "哈迪斯影院");
+        request.addRequestParam("TheatreName", "哈迪斯影院");
         new HttpPostTask(request, new ResponseHandler() {
             @Override
             public void success(CommonResponse response) {
