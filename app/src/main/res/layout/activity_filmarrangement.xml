@@ -1,38 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.example.yusei.yupiaopiao.FilmArrangementActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context="com.example.yusei.yupiaopiao.FilmArrangementActivity">
 
-    <LinearLayout
-            android:id="@+id/ll_xx"
-            android:orientation="vertical"
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_xx"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<Spinner-->
+    <!--android:id="@+id/sp_movie"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_weight="5"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--</Spinner>-->
+
+    <!--<Spinner-->
+    <!--android:id="@+id/sp_time"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_weight="5"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--</Spinner>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/recycler_filmarrangement"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_below="@+id/ll_xx">-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+
+    <!--<ViewFlipper-->
+            <!--android:id="@+id/vflp_help"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"/>-->
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_movie2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        <Spinner
-                android:id="@+id/sp_movie"
-                android:layout_width="match_parent"
-                android:layout_weight="5"
-                android:layout_height="wrap_content">
-        </Spinner>
-
-        <Spinner
-                android:id="@+id/sp_time"
-                android:layout_width="match_parent"
-                android:layout_weight="5"
-                android:layout_height="wrap_content">
-        </Spinner>
-
-    </LinearLayout>
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_filmarrangement"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/ll_xx">
+            android:layout_height="0dp"
+            android:layout_weight="3">
 
     </android.support.v7.widget.RecyclerView>
 
-</RelativeLayout>
+
+</LinearLayout>

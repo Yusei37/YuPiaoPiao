@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MovieFragment extends Fragment {
 
-    private List<Movie> movieList = new ArrayList<>();
+    public static List<Movie> movieList = new ArrayList<>();
     private MovieAdapter adapter;
 
     public  MovieFragment() {
