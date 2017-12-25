@@ -142,6 +142,7 @@ public class FilmArrangementActivity extends AppCompatActivity {
                 for (int i = 0; i < list.size(); i++) {
                     HashMap<String, String> map = list.get(i);
                     FilmArrangement filmArrangement = new FilmArrangement();
+                    filmArrangement.setTheatreName(theatre.getTheatreName());
                     filmArrangement.setFilmArrangementID(Integer.valueOf(map.get("FilmArrangementID")));
                     String date = map.get("BeginTime");
                     filmArrangement.setBeginTime(new java.util.Date(Long.valueOf(date).longValue()));

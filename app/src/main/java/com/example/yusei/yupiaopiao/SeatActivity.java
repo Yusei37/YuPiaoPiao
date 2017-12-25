@@ -1,26 +1,42 @@
 package com.example.yusei.yupiaopiao;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class SeatActivity extends AppCompatActivity implements SeatTable.SeatChecker{
+public class SeatActivity extends AppCompatActivity implements SeatTable.SeatChecker, View.OnClickListener{
 
     public SeatTable seatTableView;
+    private TextView tv_buy2;
 
     private FilmArrangement filmArrangement;
     private int[][] seat = null;
+    private Booking booking = new Booking();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat);
         filmArrangement = (FilmArrangement) getIntent().getSerializableExtra("FilmArrangement");
+        booking.setPhoneNumber(MainActivity.currentLoginCustomer.getPhoneNumber());
+        booking.setMovieName(filmArrangement.getMovieName());
+        booking.setTheatreName(filmArrangement.getTheatreName());
+        booking.setMovieHallName(filmArrangement.getMovieHallName());
+        booking.setTime(filmArrangement.getBeginTime());
+        booking.setPrice(filmArrangement.getPrice());
+
+
         initSeat();
 
+        tv_buy2 = (TextView) findViewById(R.id.tv_buy2);
+        tv_buy2.setOnClickListener(this);
         seatTableView = (SeatTable) findViewById(R.id.seatView);
         seatTableView.setScreenName(filmArrangement.getMovieHallName());//设置屏幕名称
         seatTableView.setMaxSelected(1);//设置最多选中
@@ -82,5 +98,22 @@ public class SeatActivity extends AppCompatActivity implements SeatTable.SeatChe
     @Override
     public String[] checkedSeatTxt(int row, int column) {
         return null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_buy2:
+                Intent intent = new Intent(this, BookingActivity.class);
+                List<String> seatList = seatTableView.getSelectedSeat();
+                String[] seat = seatList.get(0).split(",");
+                int row = Integer.valueOf(seat[0]) + 1;
+                int col = Integer.valueOf(seat[1]) + 1;
+                booking.setRow(row);
+                booking.setCol(col);
+                intent.putExtra("Booking", booking);
+                startActivity(intent);
+                break;
+        }
     }
 }
