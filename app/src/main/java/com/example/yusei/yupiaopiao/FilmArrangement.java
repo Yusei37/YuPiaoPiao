@@ -1,9 +1,11 @@
 package com.example.yusei.yupiaopiao;
 
+import java.io.Serializable;
+
 /**
  * Created by yusei on 2017/12/17
  */
-public class FilmArrangement {
+public class FilmArrangement implements Serializable {
     private int filmArrangementID;
     private String movieName;
     private String theatreName;

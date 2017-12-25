@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class FilmArrangementAdapter extends RecyclerView.Adapter<FilmArrangement
     private List<FilmArrangement> mFilmArrangementList;
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        View filmarrangementView;
         TextView tv_begintime;
         TextView tv_endtime;
         TextView tv_moviehall;
@@ -30,6 +31,7 @@ public class FilmArrangementAdapter extends RecyclerView.Adapter<FilmArrangement
 
         public ViewHolder(View view) {
             super(view);
+            filmarrangementView = view;
             tv_begintime = (TextView) view.findViewById(R.id.tv_begintime);
             tv_endtime = (TextView) view.findViewById(R.id.tv_endtime);
             tv_moviehall = (TextView) view.findViewById(R.id.tv_moviehall);
@@ -56,7 +58,18 @@ public class FilmArrangementAdapter extends RecyclerView.Adapter<FilmArrangement
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.filmarrangement_item, parent, false);
-        return new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.btn_buy2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), SeatActivity.class);
+                int postion = holder.getAdapterPosition();
+                FilmArrangement filmArrangement = mFilmArrangementList.get(postion);
+                intent.putExtra("FilmArrangement", filmArrangement);
+                v.getContext().startActivity(intent);
+            }
+        });
+        return holder;
     }
 
     @Override
