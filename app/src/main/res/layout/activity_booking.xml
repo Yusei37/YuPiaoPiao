@@ -6,7 +6,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.yusei.yupiaopiao.BookingActivity">
+        tools:context="com.example.yusei.yupiaopiao.activity.BookingActivity">
 
     <ScrollView
             android:layout_width="match_parent"

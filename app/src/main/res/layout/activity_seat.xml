@@ -5,7 +5,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.example.yusei.yupiaopiao.SeatTable
+    <com.example.yusei.yupiaopiao.view.SeatTable
             android:id="@+id/seatView"
             android:background="#ffffff"
             android:layout_width="wrap_content"

@@ -4,7 +4,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:context="com.example.yusei.yupiaopiao.FilmArrangementActivity">
+                    tools:context="com.example.yusei.yupiaopiao.activity.FilmArrangementActivity">
 
     <!--<LinearLayout-->
     <!--android:id="@+id/ll_xx"-->
