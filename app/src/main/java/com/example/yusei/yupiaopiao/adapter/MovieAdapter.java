@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.yusei.yupiaopiao.activity.MovieDetailActivity;
 import com.example.yusei.yupiaopiao.activity.SeatActivity;
+import com.example.yusei.yupiaopiao.activity.TheatreFragment;
 import com.example.yusei.yupiaopiao.beans.Movie;
 import com.example.yusei.yupiaopiao.R;
 
@@ -71,8 +72,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "购票", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(v.getContext(), SeatActivity.class);
-                v.getContext().startActivity(intent);
+//                Intent intent = new Intent(v.getContext(), TheatreFragment.class);
+//                v.getContext().startActivity(intent);
             }
         });
         return holder;

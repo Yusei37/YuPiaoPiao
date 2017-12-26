@@ -41,6 +41,30 @@
                 android:layout_alignParentBottom="true">
 
             <TextView
+                    android:id="@+id/txt_movie"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/tab_menu_bg"
+                    android:drawablePadding="3dp"
+                    android:drawableTop="@drawable/tab_menu_movie"
+                    android:gravity="center"
+                    android:textColor="@drawable/tab_menu_movie_text"
+                    android:text="电影"/>
+
+            <TextView
+                    android:id="@+id/txt_theatre"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/tab_menu_bg"
+                    android:drawablePadding="3dp"
+                    android:drawableTop="@drawable/tab_menu_theatre"
+                    android:gravity="center"
+                    android:textColor="@drawable/tab_menu_theatre_text"
+                    android:text="影院"/>
+
+            <TextView
                     android:id="@+id/txt_deal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -51,30 +75,6 @@
                     android:gravity="center"
                     android:textColor="@drawable/tab_menu_deal_text"
                     android:text="客服"/>
-
-            <TextView
-                    android:id="@+id/txt_poi"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/tab_menu_bg"
-                    android:drawablePadding="3dp"
-                    android:drawableTop="@drawable/tab_menu_poi"
-                    android:gravity="center"
-                    android:textColor="@drawable/tab_menu_poi_text"
-                    android:text="电影"/>
-
-            <TextView
-                    android:id="@+id/txt_user"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/tab_menu_bg"
-                    android:drawablePadding="3dp"
-                    android:drawableTop="@drawable/tab_menu_user"
-                    android:gravity="center"
-                    android:textColor="@drawable/tab_menu_user_text"
-                    android:text="影院"/>
 
             <TextView
                     android:id="@+id/txt_more"

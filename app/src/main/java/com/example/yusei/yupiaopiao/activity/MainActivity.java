@@ -19,9 +19,9 @@ import com.example.yusei.yupiaopiao.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView tabDeal;
-    private TextView tabPoi;
+    private TextView tabMovie;
     private TextView tabMore;
-    private TextView tabUser;
+    private TextView tabTheatre;
 
     private FrameLayout ly_content;
 
@@ -82,15 +82,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //UI组件初始化与事件绑定
     private void bindView() {
         tabDeal = (TextView)this.findViewById(R.id.txt_deal);
-        tabPoi = (TextView)this.findViewById(R.id.txt_poi);
-        tabUser = (TextView)this.findViewById(R.id.txt_user);
+        tabMovie = (TextView)this.findViewById(R.id.txt_movie);
+        tabTheatre = (TextView)this.findViewById(R.id.txt_theatre);
         tabMore = (TextView)this.findViewById(R.id.txt_more);
         ly_content = (FrameLayout) findViewById(R.id.fragment_container);
 
         tabDeal.setOnClickListener(this);
         tabMore.setOnClickListener(this);
-        tabUser.setOnClickListener(this);
-        tabPoi.setOnClickListener(this);
+        tabTheatre.setOnClickListener(this);
+        tabMovie.setOnClickListener(this);
 
     }
 
@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void selected(){
         tabDeal.setSelected(false);
         tabMore.setSelected(false);
-        tabPoi.setSelected(false);
-        tabUser.setSelected(false);
+        tabMovie.setSelected(false);
+        tabTheatre.setSelected(false);
     }
 
     //隐藏所有Fragment
@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selected();
                 tabDeal.setSelected(true);
                 if(f1==null){
-                //    f1 = new FirstFragment("第一个Fragment");
                     f1 = new SecondFragment();
                     transaction.add(R.id.fragment_container,f1);
                 }else{
@@ -146,9 +145,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
 
-            case R.id.txt_poi:
+            case R.id.txt_movie:
                 selected();
-                tabPoi.setSelected(true);
+                tabMovie.setSelected(true);
                 if(f3==null){
                     f3 = new MovieFragment();
                     transaction.add(R.id.fragment_container,f3);
@@ -157,9 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
 
-            case R.id.txt_user:
+            case R.id.txt_theatre:
                 selected();
-                tabUser.setSelected(true);
+                tabTheatre.setSelected(true);
                 if(f4==null){
                     f4 = new TheatreFragment();
                     transaction.add(R.id.fragment_container,f4);
@@ -168,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
         }
-
         transaction.commit();
     }
 }
