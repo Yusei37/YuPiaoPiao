@@ -84,8 +84,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         Movie movie = mMovieList.get(position);
         Glide.with(mContext).load(movie.getPoster()).fitCenter().error(R.mipmap.ic_launcher).into(holder.movieimage);
         holder.tv_moviename.setText(movie.getMovieName());
-        holder.tv_director.setText(movie.getDirector());
-        holder.tv_actor.setText(movie.getActor());
+        holder.tv_director.setText("导演: " + movie.getDirector());
+        holder.tv_actor.setText("主演: " + movie.getActor());
     }
 
     @Override
